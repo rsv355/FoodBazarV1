@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
+import foodbazar.webmyne.com.foodbazar.fragments.CitySelectionFragment;
+import foodbazar.webmyne.com.foodbazar.fragments.HotelListFragment;
 import it.neokree.googlenavigationdrawer.GAccount;
 import it.neokree.googlenavigationdrawer.GAccountListener;
 import it.neokree.googlenavigationdrawer.GSection;
@@ -18,7 +20,7 @@ import it.neokree.googlenavigationdrawer.GoogleNavigationDrawer;
 public class MainActivity extends GoogleNavigationDrawer implements GAccountListener{
 
     GAccount account;
-    GSection section1, section2, recorder,night,last,settingsSection;
+    GSection CitySelection, HotelSelection, ContactUs,History,SignIn,settingsSection;
 
     @Override
     public void init(Bundle savedInstanceState) {
@@ -29,27 +31,30 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
         this.setAccountListener(this);
 
         // create sections
-        section1 = this.newSection("Section 1",new FragmentIndex());
-        section2 = this.newSection("Section 2",new FragmentIndex());
+        CitySelection = this.newSection("Select Location", this.getResources().getDrawable(R.drawable.ic_home), new CitySelectionFragment());
+        HotelSelection = this.newSection("Select Hotel",this.getResources().getDrawable(R.drawable.ic_people),new HotelListFragment()).setSectionColor(Color.parseColor("#80ffffff"));
         // recorder section with icon and 10 notifications
-        recorder = this.newSection("Recorder",this.getResources().getDrawable(R.drawable.ic_mic_white_24dp),new FragmentIndex()).setNotifications(10);
+        ContactUs = this.newSection("Contact Us",this.getResources().getDrawable(R.drawable.ic_photos),new FragmentIndex());
         // night section with icon, section color and notifications
-        night = this.newSection("Night Section", this.getResources().getDrawable(R.drawable.ic_hotel_grey600_24dp), new FragmentIndex())
-                .setSectionColor(Color.parseColor("#2196f3")).setNotifications(150);
+        History = this.newSection("History Page", this.getResources().getDrawable(R.drawable.ic_pages), new FragmentIndex());
         // night section with section color
-        last = this.newSection("Last Section", new FragmentIndex()).setSectionColor((Color.parseColor("#ff9800")));
+        SignIn = this.newSection("Sign In Page",this.getResources().getDrawable(R.drawable.ic_photos), new FragmentIndex()).setSectionColor(Color.parseColor("#80ffffff"));
 
         Intent i = new Intent(this,Settings.class);
         settingsSection = this.newSection("Settings",this.getResources().getDrawable(R.drawable.ic_settings_black_24dp),i);
 
         // add your sections to the drawer
-        this.addSection(section1);
-        this.addSection(section2);
+        this.addSection(CitySelection);
+        this.addSection(HotelSelection);
+        this.addSection(ContactUs);
+        this.addSection(History);
+        this.addSection(SignIn);
+
         this.addDivisor();
-        this.addSection(recorder);
-        this.addSection(night);
-        this.addDivisor();
-        this.addSection(last);
+//        this.addSection(recorder);
+//        this.addSection(night);
+//        this.addDivisor();
+//        this.addSection(last);
         this.addBottomSection(settingsSection);
 
         // start thread
