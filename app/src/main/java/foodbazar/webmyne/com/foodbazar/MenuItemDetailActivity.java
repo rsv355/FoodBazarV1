@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -42,14 +44,16 @@ public class MenuItemDetailActivity extends Activity {
     private JSONObject innerObject;
     private Spinner spinnerFoodDietType;
     private TextView name, tagline, cuisine, quantity;
+    private TextView totalPrice;
+
     private FoodDietSpinnerAdapter foodDietSpinnerAdapter;
-    private Button remove, add;
+    private ImageView remove, add;
     private SubmitOrder submitOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_item_detail);
+        setContentView(R.layout.activity_menu_item_detail1);
 
 
         // Get Menu Items from PrefUtils Class
@@ -72,6 +76,7 @@ public class MenuItemDetailActivity extends Activity {
                 quantity.setText("Quantity " + (++i));
                 price.setText(getResources().getString(R.string.rupees) + " " + (Integer.parseInt(hotelMenuItem.Price) * i) + "");
 
+                totalPrice.setText(getResources().getString(R.string.rupees) + " " + (Integer.parseInt(hotelMenuItem.Price) * i) + "");
             }
         });
 
@@ -84,12 +89,16 @@ public class MenuItemDetailActivity extends Activity {
                     quantity.setText("Quantity " + (--i));
                     price.setText(getResources().getString(R.string.rupees) + " " + (Integer.parseInt(hotelMenuItem.Price) * i) + "");
 
+                    totalPrice.setText(getResources().getString(R.string.rupees) + " " + (Integer.parseInt(hotelMenuItem.Price) *i) + "");
+
                 }
 
             }
         });
 
         price.setText(getResources().getString(R.string.rupees) + " " + hotelMenuItem.Price + "");
+
+        totalPrice.setText(getResources().getString(R.string.rupees) + " " + hotelMenuItem.Price + "");
 
         foodDietSpinnerAdapter = new FoodDietSpinnerAdapter(MenuItemDetailActivity.this, hotelMenuItem.foodDiatListArrayList);
         spinnerFoodDietType = (Spinner) findViewById(R.id.spinnerFoodDietType);
@@ -106,10 +115,12 @@ public class MenuItemDetailActivity extends Activity {
         addToCart = (TextView) findViewById(R.id.addToCart);
         price = (TextView) findViewById(R.id.price);
         quantity = (TextView) findViewById(R.id.quantity);
-        remove = (Button) findViewById(R.id.remove);
-        add = (Button) findViewById(R.id.add);
+        remove = (ImageView) findViewById(R.id.remove);
+        add = (ImageView) findViewById(R.id.add);
         name = (TextView) findViewById(R.id.name);
         tagline = (TextView) findViewById(R.id.tagline);
+
+        totalPrice = (TextView)findViewById(R.id.totalPrice);
         //  cuisine= (TextView) findViewById(R.id.cuisine);
 
         addToCart.setOnClickListener(new View.OnClickListener() {
@@ -194,7 +205,7 @@ public class MenuItemDetailActivity extends Activity {
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
 
             TextView txt = new TextView(MenuItemDetailActivity.this);
-            txt.setPadding(16, 16, 16, 16);
+           txt.setPadding(16, 16, 16, 16);
             txt.setTextSize(18);
             txt.setGravity(Gravity.CENTER_VERTICAL);
             txt.setText(asr.get(position).DietName);
@@ -208,7 +219,7 @@ public class MenuItemDetailActivity extends Activity {
 
             TextView txt = new TextView(MenuItemDetailActivity.this);
             txt.setGravity(Gravity.CENTER_VERTICAL);
-            txt.setPadding(16, 16, 16, 16);
+         //   txt.setPadding(16, 16, 16, 16);
             txt.setTextSize(18);
             txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_down, 0);
             txt.setText(asr.get(i).DietName);

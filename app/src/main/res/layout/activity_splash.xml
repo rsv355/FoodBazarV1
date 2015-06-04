@@ -41,6 +41,7 @@
                 android:id="@+id/txt_splash"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:textColor="#c1cb31"
                 android:textSize="28dp"
                 app:reflectionColor="#f00"/>
@@ -68,6 +69,8 @@
                 android:id="@+id/splash"
                 android:layout_width="wrap_content"
                 android:padding="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_height="wrap_content"
                 android:text="Choose Your favourite restaurant and Enjoy the food !"
                 android:gravity="center"

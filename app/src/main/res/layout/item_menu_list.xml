@@ -12,8 +12,12 @@
 
 
     <LinearLayout
+        android:background="#e6e6e6"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
     android:gravity="center"
-    android:padding="16dp"
+    android:padding="8dp"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -87,8 +91,5 @@
 
 </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#ccc"/>
+
 </LinearLayout>

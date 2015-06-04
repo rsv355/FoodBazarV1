@@ -29,6 +29,9 @@
         <activity android:name=".MenuItemListActivity"/>
         <activity android:name=".MenuItemDetailActivity"/>
         <activity android:name=".CartActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".RateActivity"/>
+
 
     </application>
 

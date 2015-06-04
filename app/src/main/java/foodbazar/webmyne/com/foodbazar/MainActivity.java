@@ -5,10 +5,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.widget.Toast;
 
 import foodbazar.webmyne.com.foodbazar.fragments.CitySelectionFragment;
 import foodbazar.webmyne.com.foodbazar.fragments.HotelListFragment;
+import foodbazar.webmyne.com.foodbazar.model.LoginClass;
+import foodbazar.webmyne.com.foodbazar.utils.PrefUtils;
 import it.neokree.googlenavigationdrawer.GAccount;
 import it.neokree.googlenavigationdrawer.GAccountListener;
 import it.neokree.googlenavigationdrawer.GSection;
@@ -22,23 +26,47 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
     GAccount account;
     GSection CitySelection, HotelSelection, ContactUs,History,SignIn,settingsSection;
 
+    LoginClass loginClass;
+
     @Override
     public void init(Bundle savedInstanceState) {
 
-        account = new GAccount("NeoKree","neokree@gmail.com",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
-        this.addAccount(account);
+        loginClass = PrefUtils.getLogin(MainActivity.this);
+
+
+//        android.app.ActionBar bar = getActionBar();
+//        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#DA4D4D")));
+
+        String namee = loginClass.FName;
+
+
+
+        if (loginClass != null)
+        {
+            account = new GAccount(namee,loginClass.LName+"@gmail.com",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
+            this.addAccount(account);
+        }
+
+        else {
+            account = new GAccount("Your Name","Please Login Account",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
+            this.addAccount(account);
+        }
+
+
+
+
 
         this.setAccountListener(this);
 
         // create sections
-        CitySelection = this.newSection("Select Location", this.getResources().getDrawable(R.drawable.ic_home), new CitySelectionFragment());
-        HotelSelection = this.newSection("Select Hotel",this.getResources().getDrawable(R.drawable.ic_people),new HotelListFragment()).setSectionColor(Color.parseColor("#80ffffff"));
+        CitySelection = this.newSection("Select Location", this.getResources().getDrawable(R.drawable.ic_home), new CitySelectionFragment()).setSectionColor(Color.parseColor("#DA4D4D"));
+        HotelSelection = this.newSection("Select Hotel",this.getResources().getDrawable(R.drawable.ic_people),new HotelListFragment()).setSectionColor(Color.parseColor("#DA4D4D"));
         // recorder section with icon and 10 notifications
-        ContactUs = this.newSection("Contact Us",this.getResources().getDrawable(R.drawable.ic_photos),new FragmentIndex());
+        ContactUs = this.newSection("Give Me Rate",this.getResources().getDrawable(R.drawable.ic_photos),new Intent(this, RateActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
         // night section with icon, section color and notifications
-        History = this.newSection("History Page", this.getResources().getDrawable(R.drawable.ic_pages), new FragmentIndex());
+        History = this.newSection("History Page", this.getResources().getDrawable(R.drawable.ic_pages), new OrderPlaceDetail()).setSectionColor(Color.parseColor("#DA4D4D"));
         // night section with section color
-        SignIn = this.newSection("Sign In Page",this.getResources().getDrawable(R.drawable.ic_photos), new FragmentIndex()).setSectionColor(Color.parseColor("#80ffffff"));
+        SignIn = this.newSection("Sign In Page",this.getResources().getDrawable(R.drawable.ic_photos), new Intent(this, LoginActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
 
         Intent i = new Intent(this,Settings.class);
         settingsSection = this.newSection("Settings",this.getResources().getDrawable(R.drawable.ic_settings_black_24dp),i);

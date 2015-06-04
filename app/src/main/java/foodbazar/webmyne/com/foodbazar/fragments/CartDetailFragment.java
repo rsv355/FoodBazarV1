@@ -1,5 +1,6 @@
 package foodbazar.webmyne.com.foodbazar.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,7 +9,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import foodbazar.webmyne.com.foodbazar.CartActivity;
+import foodbazar.webmyne.com.foodbazar.LoginActivity;
+import foodbazar.webmyne.com.foodbazar.MenuListActivity;
 import foodbazar.webmyne.com.foodbazar.R;
 import foodbazar.webmyne.com.foodbazar.model.SubmitOrder;
 import foodbazar.webmyne.com.foodbazar.utils.PrefUtils;
@@ -21,6 +26,7 @@ public class CartDetailFragment extends Fragment {
     private SubmitOrder submitOrder;
     private View itemView;
     private TextView btnDeliveryType,totalBottom,tax,subtotal;
+    private TextView addProduct;
     public static Double dTax=0.0d,dSubTotal=0.0d,dTotalBottom=0.0d;
 
     public static CartDetailFragment newInstance()
@@ -50,6 +56,19 @@ public class CartDetailFragment extends Fragment {
 
         // Inflate the layout for this fragment
         convertView= inflater.inflate(R.layout.fragment_cart_detail, container, false);
+
+        addProduct = (TextView)convertView.findViewById(R.id.addProduct);
+
+        addProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent it = new Intent(getActivity(), MenuListActivity.class);
+                startActivity(it);
+
+            }
+        });
+
         btnDeliveryType= (TextView) convertView.findViewById(R.id.btnDeliveryType);
         totalBottom= (TextView) convertView.findViewById(R.id.totalBottom);
         tax= (TextView) convertView.findViewById(R.id.tax);
@@ -93,7 +112,11 @@ public class CartDetailFragment extends Fragment {
         btnDeliveryType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CartActivity)getActivity()).setCurrentTab(1);
+
+                Intent it = new Intent(getActivity(), LoginActivity.class);
+                startActivity(it);
+
+               // ((CartActivity)getActivity()).setCurrentTab(1);
             }
         });
 

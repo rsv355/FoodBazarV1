@@ -1,0 +1,203 @@
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#DA4D4D"
+    >
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:src="@drawable/logo"
+        app:border_width="2dp"
+        app:border_color="#fff"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"/>
+
+
+
+    <TextView  android:layout_width="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+       android:text="Thanks Your Order Has been Confirmed !!"
+        android:padding="16dp"
+        android:layout_gravity="center"
+        android:textColor="#fff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView  android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Order Id"
+                android:textColor="#494949"
+                android:textSize="12dp"
+               android:padding="10dp"/>
+
+            <TextView  android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bill Value"
+                android:textSize="12dp"
+                android:padding="10dp"
+                android:textColor="#494949"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/txtOrder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="EIP430"
+                android:textStyle="bold"
+
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/txt_rupee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹ 400.0"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lineA"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:orientation="vertical"
+            android:background="#ccc"
+            android:layout_marginTop="10dp">
+            </LinearLayout>
+
+
+        <TextView  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivering To :"
+            android:layout_marginTop="10dp"
+            android:textSize="12dp"
+            android:textColor="#494949"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/thinga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#494949"
+            android:text="Thirukamran Nagarjun"
+            android:layout_marginLeft="10dp"
+          />
+
+
+        <TextView
+            android:id="@+id/txt_address" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21, Uma Society, Harni Road, VAdodara"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:id="@+id/lineAb"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:orientation="vertical"
+            android:background="#ccc"
+            android:layout_marginTop="20dp">
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            >
+
+            <TextView  android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Shop Details :"
+                android:textColor="#494949"
+                android:textSize="12dp"
+                android:padding="10dp"/>
+
+            <TextView  android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shop Contacts"
+                android:textColor="#494949"
+                android:textSize="12dp"
+                android:padding="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <TextView
+                android:id="@+id/shopname_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="The Kirana Shop"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+               />
+
+            <TextView
+                android:id="@+id/txt_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9737388786"
+               android:layout_marginRight="10dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

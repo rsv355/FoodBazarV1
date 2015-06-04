@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    >
+
+
+
+
+<LinearLayout
+    android:padding="16dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/app_share"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"/>
+
+
+
+    <EditText
+        android:textColor="#494949"
+        android:id="@+id/etEmail"
+        android:hint="Enter Username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:textColor="#494949"
+        android:layout_marginTop="16dp"
+        android:id="@+id/etPassword"
+        android:hint="Enter Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+   android:layout_margin="16dp"
+    android:id="@+id/btnLogin"
+    android:text="Login"
+        android:textSize="16dp"
+    android:padding="8dp"
+    android:background="#DA4D4D"
+    android:gravity="center"
+    android:textColor="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+    <!--<TextView-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:id="@+id/btnSignUp"-->
+        <!--android:text="Want To Sign Up Account"-->
+        <!--android:textStyle="bold|italic"-->
+        <!--android:textSize="18dp"-->
+        <!--android:padding="16dp"-->
+
+        <!--android:gravity="center"-->
+        <!--android:textColor="#494949"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+
+
+
+
+</LinearLayout>
+</LinearLayout>
