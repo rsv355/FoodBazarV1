@@ -123,6 +123,17 @@ public class MenuItemDetailActivity extends Activity {
         totalPrice = (TextView)findViewById(R.id.totalPrice);
         //  cuisine= (TextView) findViewById(R.id.cuisine);
 
+        totalPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent it = new Intent(getApplicationContext(), AddToCart.class);
+                startActivity(it);
+
+            }
+        });
+
+
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,6 +180,9 @@ public class MenuItemDetailActivity extends Activity {
 
                 Intent intent = new Intent(MenuItemDetailActivity.this, CartActivity.class);
 
+                intent.putExtra("tax",getIntent().getStringExtra("tax"));
+                intent.putExtra("fee",getIntent().getStringExtra("fee"));
+
                 startActivity(intent);
 
             }
@@ -198,7 +212,7 @@ public class MenuItemDetailActivity extends Activity {
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return (long) position;
         }
 
         @Override
@@ -222,7 +236,7 @@ public class MenuItemDetailActivity extends Activity {
          //   txt.setPadding(16, 16, 16, 16);
             txt.setTextSize(18);
             txt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_down, 0);
-            txt.setText(asr.get(i).DietName);
+            txt.setText(asr.get(position).DietName);
             txt.setTextColor(Color.parseColor("#000000"));
             return txt;
         }

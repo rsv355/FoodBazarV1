@@ -25,7 +25,8 @@ android:padding="50dp"
 
             android:text="FOOD BAZAR"
             android:textColor="#fff"
-android:textSize="16dp"
+android:textSize="18dp"
+            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -104,6 +105,7 @@ android:textSize="16dp"
 
 </FrameLayout>
 
+
     <github.chenupt.springindicator.SpringIndicator
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
@@ -123,4 +125,6 @@ android:textSize="16dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         />
+
+
 </LinearLayout>

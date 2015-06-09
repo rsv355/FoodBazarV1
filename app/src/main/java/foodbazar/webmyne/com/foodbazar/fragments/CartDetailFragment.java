@@ -3,6 +3,7 @@ package foodbazar.webmyne.com.foodbazar.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import foodbazar.webmyne.com.foodbazar.CartActivity;
+import foodbazar.webmyne.com.foodbazar.ContactActivity;
 import foodbazar.webmyne.com.foodbazar.LoginActivity;
 import foodbazar.webmyne.com.foodbazar.MenuListActivity;
 import foodbazar.webmyne.com.foodbazar.R;
@@ -25,13 +27,15 @@ public class CartDetailFragment extends Fragment {
     private LinearLayout addOrderLayout;
     private SubmitOrder submitOrder;
     private View itemView;
-    private TextView btnDeliveryType,totalBottom,tax,subtotal;
+    private TextView btnDeliveryType,totalBottom,tax,subtotal,taxPercent;
     private TextView addProduct;
     public static Double dTax=0.0d,dSubTotal=0.0d,dTotalBottom=0.0d;
+
 
     public static CartDetailFragment newInstance()
     {
         CartDetailFragment fragment = new CartDetailFragment();
+
 
         return fragment;
     }
@@ -57,6 +61,12 @@ public class CartDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         convertView= inflater.inflate(R.layout.fragment_cart_detail, container, false);
 
+        CartActivity activity = (CartActivity) getActivity();
+
+        String myDataFromActivity = activity.getMyData();
+
+        Log.e("JAYDEEP TAX IS :", "" +myDataFromActivity);
+
         addProduct = (TextView)convertView.findViewById(R.id.addProduct);
 
         addProduct.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +83,9 @@ public class CartDetailFragment extends Fragment {
         totalBottom= (TextView) convertView.findViewById(R.id.totalBottom);
         tax= (TextView) convertView.findViewById(R.id.tax);
         subtotal= (TextView) convertView.findViewById(R.id.subtotal);
+        taxPercent = (TextView)convertView.findViewById(R.id.taxPercent);
+
+        taxPercent.setText(myDataFromActivity);
 
         addOrderLayout= (LinearLayout) convertView.findViewById(R.id.addOrderLayout);
         submitOrder= PrefUtils.getCartItems(getActivity());
@@ -88,14 +101,16 @@ public class CartDetailFragment extends Fragment {
             TextView itemName= (TextView) itemView.findViewById(R.id.name);
             TextView itemPrice= (TextView) itemView.findViewById(R.id.price);
             itemName.setText(submitOrder.orderItemArrayList.get(i).MenuItemName+" ("+submitOrder.orderItemArrayList.get(i).MenuItemQuantity+") ");
-            itemPrice.setText(getResources().getString(R.string.rupees)+" "+submitOrder.orderItemArrayList.get(i).ItemPrice);
+            itemPrice.setText(getResources().getString(R.string.rupees) + " " + submitOrder.orderItemArrayList.get(i).ItemPrice);
 
            // view added on linear layout
             addOrderLayout.addView(itemView);
 
             dSubTotal=dSubTotal+ Double.parseDouble(submitOrder.orderItemArrayList.get(i).ItemPrice);
 
-            dTax=((dSubTotal*5)/100);
+            float taxPercentRupee =  Float.parseFloat(taxPercent.getText().toString());
+
+            dTax=((dSubTotal*taxPercentRupee)/100);
 
             dTotalBottom=dSubTotal+dTax;
         }
@@ -113,10 +128,10 @@ public class CartDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent it = new Intent(getActivity(), LoginActivity.class);
-                startActivity(it);
+//                Intent it = new Intent(getActivity(), ContactActivity.class);
+//                startActivity(it);
 
-               // ((CartActivity)getActivity()).setCurrentTab(1);
+                ((CartActivity)getActivity()).setCurrentTab(1);
             }
         });
 

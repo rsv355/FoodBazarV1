@@ -24,7 +24,7 @@ import it.neokree.googlenavigationdrawer.GoogleNavigationDrawer;
 public class MainActivity extends GoogleNavigationDrawer implements GAccountListener{
 
     GAccount account;
-    GSection CitySelection, HotelSelection, ContactUs,History,SignIn,settingsSection;
+    GSection CitySelection, HotelSelection, ContactUs,History,SignIn,History1,Contact,settingsSection;
 
     LoginClass loginClass;
 
@@ -33,24 +33,27 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
 
         loginClass = PrefUtils.getLogin(MainActivity.this);
 
+        account = new GAccount("Your Name","Please Login Account",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
+            this.addAccount(account);
+
 
 //        android.app.ActionBar bar = getActionBar();
 //        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#DA4D4D")));
 
-        String namee = loginClass.FName;
+    //    String namee = loginClass.FName;
 
 
 
-        if (loginClass != null)
-        {
-            account = new GAccount(namee,loginClass.LName+"@gmail.com",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
-            this.addAccount(account);
-        }
-
-        else {
-            account = new GAccount("Your Name","Please Login Account",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
-            this.addAccount(account);
-        }
+//        if (loginClass != null)
+//        {
+//            account = new GAccount(loginClass.FName,loginClass.LName+"@gmail.com",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
+//            this.addAccount(account);
+//        }
+//
+//        else {
+//            account = new GAccount("Your Name","Please Login Account",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
+//            this.addAccount(account);
+//        }
 
 
 
@@ -64,9 +67,13 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
         // recorder section with icon and 10 notifications
         ContactUs = this.newSection("Give Me Rate",this.getResources().getDrawable(R.drawable.ic_photos),new Intent(this, RateActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
         // night section with icon, section color and notifications
-        History = this.newSection("History Page", this.getResources().getDrawable(R.drawable.ic_pages), new OrderPlaceDetail()).setSectionColor(Color.parseColor("#DA4D4D"));
+        History = this.newSection("HistoryPage", this.getResources().getDrawable(R.drawable.ic_pages), new OrderPlaceDetail()).setSectionColor(Color.parseColor("#DA4D4D"));
         // night section with section color
-        SignIn = this.newSection("Sign In Page",this.getResources().getDrawable(R.drawable.ic_photos), new Intent(this, LoginActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
+        SignIn = this.newSection("Sign In Page",this.getResources().getDrawable(R.drawable.ic_photos), new Intent(this, SignUpActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
+
+        History1 = this.newSection("User Wallet", this.getResources().getDrawable(R.drawable.ic_pages), new Intent(this, WalletActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
+
+        Contact = this.newSection("Contact Us", this.getResources().getDrawable(R.drawable.ic_pages),new Intent(this, ContactActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
 
         Intent i = new Intent(this,Settings.class);
         settingsSection = this.newSection("Settings",this.getResources().getDrawable(R.drawable.ic_settings_black_24dp),i);
@@ -77,13 +84,15 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
         this.addSection(ContactUs);
         this.addSection(History);
         this.addSection(SignIn);
+        this.addSection(History1);
+        this.addSection(Contact);
 
-        this.addDivisor();
+     //   this.addDivisor();
 //        this.addSection(recorder);
 //        this.addSection(night);
 //        this.addDivisor();
 //        this.addSection(last);
-        this.addBottomSection(settingsSection);
+    //    this.addBottomSection(settingsSection);
 
         // start thread
         t.start();
@@ -108,7 +117,7 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
                     @Override
                     public void run() {
                         notifyAccountDataChanged();
-                        Toast.makeText(getApplicationContext(), "Loaded 'from web' user image", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getApplicationContext(), "Loaded 'from web' user image", Toast.LENGTH_SHORT).show();
                     }
                 });
                 //Log.w("PHOTO","user account photo setted");

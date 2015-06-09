@@ -150,6 +150,8 @@ public class MenuItemListActivity extends Activity {
                     Intent it = new Intent(MenuItemListActivity.this,MenuItemDetailActivity.class);
 
                     it.putExtra("item_name",parkingList.get(position).ItemaName+"");
+                    it.putExtra("tax",getIntent().getStringExtra("tax"));
+                    it.putExtra("fee",getIntent().getStringExtra("fee"));
 
                     startActivity(it);
 

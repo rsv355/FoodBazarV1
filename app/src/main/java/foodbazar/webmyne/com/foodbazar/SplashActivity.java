@@ -54,14 +54,15 @@ public class SplashActivity extends Activity {
 
 
 
-		txtFoodBazar.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-				Intent it = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(it);
-			}
-		});
+//		txtFoodBazar.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//
+//				Intent it = new Intent(getApplicationContext(), MainActivity.class);
+//				startActivity(it);
+//
+//			}
+//		});
 
 	}
 
