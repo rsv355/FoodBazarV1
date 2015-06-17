@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<LinearLayout
+    android:background="#E0E0E0"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="4dp"
+    android:orientation="horizontal"
+
+    android:padding="8dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+
+        android:id="@+id/hotelImage"
+        android:layout_gravity="center"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/burger"/>
+
+    <LinearLayout
+
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_marginLeft="10dp"
+
+            android:text="Hotel Name"
+            android:textSize="16sp"
+            android:textColor="#494949"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:id="@+id/address"
+            android:text="Address"
+            android:textSize="12sp"
+            android:textColor="#777"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+
+
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:background="#E0E0E0"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:paddingLeft="16dp"
+            android:paddingRight="8dp"
+
+
+
+            android:text="Min.Order"
+            android:textSize="12sp"
+
+
+
+            android:gravity="center_vertical"
+            android:textColor="#999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+        android:paddingLeft="16dp"
+        android:paddingRight="8dp"
+android:layout_gravity="center"
+
+        android:id="@+id/minimumOrder"
+        android:text="Mail Id"
+        android:textSize="12sp"
+
+
+
+       android:gravity="center_vertical"
+        android:textColor="#999"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:paddingLeft="16dp"
+                android:paddingRight="8dp"
+
+
+
+                android:text="Delivery Time"
+                android:textSize="12sp"
+
+
+
+                android:gravity="center_vertical"
+                android:textColor="#999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+            android:paddingLeft="16dp"
+            android:paddingRight="8dp"
+
+            android:id="@+id/deliveryTime"
+            android:text="Phon no"
+            android:textSize="12sp"
+
+                android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:textColor="#999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:paddingLeft="16dp"
+                android:paddingRight="8dp"
+
+
+
+                android:text="PickUp Time"
+                android:textSize="12sp"
+
+
+
+                android:gravity="center_vertical"
+                android:textColor="#999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:paddingLeft="16dp"
+                android:paddingRight="8dp"
+
+                android:id="@+id/pickupTime"
+                android:text="Phon no"
+                android:textSize="12sp"
+
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:textColor="#999"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+</LinearLayout>

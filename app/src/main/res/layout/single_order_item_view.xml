@@ -2,39 +2,135 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <View
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#ccc"
-        />
+    <!--<View-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:background="#ccc"-->
+        <!--/>-->
 
     <LinearLayout
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
+        android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#E0E0E0"
+        android:layout_margin="8dp">
+
+
+        <ImageView
+
+            android:src="@drawable/ic_maps_local_restaurant"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingRight="8dp"/>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
         <TextView
             android:id="@+id/name"
             android:textColor="#494949"
             android:textSize="16sp"
             android:text="Item Name 2"
+            android:layout_marginLeft="8dp"
             android:textStyle="bold"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+
+            android:layout_width="wrap_content"
+
             android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/remove"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_content_remove_circle"/>
+
+
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:textColor="#494949"
+                    android:textSize="16sp"
+                    android:text="2"
+                    android:layout_marginLeft="8dp"
+                    android:textStyle="bold"
+
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:src="@drawable/ic_content_add_circle"/>
+
+
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/taste"
+                android:textColor="#494949"
+                android:textSize="12sp"
+                android:text="Spicy Hot with green vegetables"
+                android:layout_marginLeft="8dp"
+                android:textStyle="italic"
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <TextView
             android:id="@+id/price"
             android:textColor="#494949"
             android:textSize="16sp"
-
+android:layout_gravity="center"
             android:textStyle="bold"
             android:text="Rs. 500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/delete"
+                android:textColor="#fff"
+                android:textSize="8sp"
+                android:layout_margin="8dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:padding="4dp"
+                android:text="DELETE"
+                android:background="#00b279"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

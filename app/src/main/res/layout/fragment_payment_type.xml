@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#fff"
+
     android:layout_height="match_parent">
 
     <ScrollView
@@ -12,13 +12,14 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp">
 
             <TextView
                 android:paddingLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:text="How would you like to pay ?"
+                android:text="Want To Confirm The Order ?"
                 android:textSize="18sp"
                 android:textColor="#494949"
                 android:layout_width="match_parent"
@@ -37,48 +38,48 @@
                     android:layout_marginBottom="8dp"
 
                     android:textSize="16sp"
-                    android:text="Cash On Delivery"
+                    android:text="With Cash On Delivery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#ccc"/>
-                <RadioButton
-                    android:id="@+id/cd"
-                    android:layout_marginBottom="8dp"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:textSize="16sp"
-                    android:text="Credit Card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#ccc"/>
-                <RadioButton
-                    android:id="@+id/nb"
-                    android:layout_marginBottom="8dp"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:textSize="16sp"
-                    android:text="Net Banking"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#ccc"/>
-                <RadioButton
-                    android:id="@+id/dc"
-                    android:layout_marginBottom="8dp"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:textSize="16sp"
-                    android:text="Debit Card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="#ccc"/>-->
+                <!--<RadioButton-->
+                    <!--android:id="@+id/cd"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="Credit Card"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="#ccc"/>-->
+                <!--<RadioButton-->
+                    <!--android:id="@+id/nb"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="Net Banking"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:background="#ccc"/>-->
+                <!--<RadioButton-->
+                    <!--android:id="@+id/dc"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:text="Debit Card"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
 
             </RadioGroup>
 
@@ -94,9 +95,9 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:textColor="#fff"
-        android:text="Make Payment"
+        android:text="Confirm Order"
         android:drawableRight="@drawable/ic_forward"
-        android:background="#DA4D4D"
+        android:background="#00b279"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

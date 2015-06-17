@@ -5,6 +5,8 @@
     android:background="#fff"
     android:layout_height="match_parent">
 
+    <include layout="@layout/app_bar"></include>
+
 
 <FrameLayout
     android:layout_width="match_parent"
@@ -12,19 +14,19 @@
     android:background="@mipmap/burgerbacc">
 
 
-
-
     <LinearLayout
 
-android:padding="50dp"
+
         android:background="#99000000"
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
 
             android:text="FOOD BAZAR"
             android:textColor="#fff"
+            android:textStyle="bold"
 android:textSize="18dp"
             android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
@@ -49,6 +51,34 @@ android:textSize="18dp"
             android:text="Vadodara."
             android:textColor="#fff"
 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+
+            />
+
+        <TextView
+
+            android:text="Email : foodbaazar@gmail.com"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+
+            />
+
+        <TextView
+
+            android:text="Phone no : 9737388786"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -106,18 +136,7 @@ android:textSize="18dp"
 </FrameLayout>
 
 
-    <github.chenupt.springindicator.SpringIndicator
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:siTextSize="18sp"
-        app:siIndicatorColors="@array/indicator_colors"
-        app:siTextColor="@color/primaryColorDark"
-        app:siSelectedTextColor="@android:color/white"
-        app:siIndicatorColor="@color/primaryColor"
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"/>
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"

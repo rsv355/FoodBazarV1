@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="240dp"
+    android:background="#fff"
+    style="@style/NavDrawer"
+    android:id="@+id/parentDrawer"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llTopDrawer"
+        android:gravity="center_vertical"
+android:layout_height="80dp"
+        android:background="@drawable/bamboo"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        style="@style/match_wrap_content"
+       >
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/hotelImage"
+            android:scaleType="centerCrop"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="8dp"
+            app:border_width="0dp"
+            app:border_color="#fff"
+            android:src="@drawable/hotel1"/>
+
+
+
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/signInEmailId"
+                android:textSize="16sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="andy@gmail.com" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llBottomDrawer"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        style="@style/match_wrap_content">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#494949"></View>
+
+
+
+    </LinearLayout>
+
+    <ListView
+        android:groupIndicator="@null"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/listDrawer"
+        android:dividerHeight="0.25dp"
+        android:divider="#ccc"
+        android:layout_above="@id/llBottomDrawer"
+        android:layout_below="@id/llTopDrawer"
+        style="@style/both_match_parent"></ListView>
+
+
+</RelativeLayout>

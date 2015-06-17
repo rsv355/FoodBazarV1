@@ -29,10 +29,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
         <RadioGroup
             android:checkedButton="@+id/radioPickup"
             android:padding="16dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <RadioButton
@@ -41,7 +52,7 @@
                 android:layout_marginBottom="8dp"
                 android:textSize="16sp"
                 android:text="Deliver"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <View
@@ -55,20 +66,145 @@
                 android:layout_marginTop="8dp"
                 android:textSize="16sp"
                 android:text="Pickup"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RadioGroup>
 
-        <TextView
-            android:paddingLeft="16dp"
-           android:layout_margin="16dp"
-            android:gravity="center"
-            android:text="Charge will be Included in Deliver Type."
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+
+
+                    android:padding="8dp"
+                    android:paddingRight="16dp"
+
+                    android:layout_marginBottom="8dp"
+                    android:text="In"
+
+                    android:textSize="16sp"
+                    android:textColor="#494949"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            <TextView
+
+            android:id="@+id/deliverTime"
+            android:padding="8dp"
+            android:paddingRight="16dp"
+
+            android:layout_marginBottom="8dp"
+            android:text="In 45 Min"
+
             android:textSize="16sp"
             android:textColor="#494949"
-            android:textStyle="bold|italic"
-            android:layout_width="match_parent"
+
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#ccc"/>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+
+
+                    android:padding="8dp"
+                    android:paddingRight="16dp"
+
+                    android:layout_marginTop="8dp"
+                    android:text="rady In"
+
+                    android:textSize="16sp"
+                    android:textColor="#494949"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+                <TextView
+
+                android:id="@+id/pickTime"
+                android:paddingRight="16dp"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:text="Ready In $5 Min"
+                android:textSize="16sp"
+
+                android:textColor="#494949"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+                </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+         >
+
+            <TextView
+
+
+                android:paddingLeft="16dp"
+                android:layout_margin="16dp"
+
+                android:text="Deliver Charge :"
+                android:textSize="20sp"
+                android:textColor="#494949"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        <TextView
+
+            android:id="@+id/deliveryCharge"
+
+           android:layout_marginRight="16dp"
+            android:layout_gravity="center"
+
+            android:text="Rs.100"
+            android:textSize="20sp"
+            android:textColor="#494949"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 </ScrollView>
@@ -81,7 +217,7 @@
         android:textColor="#fff"
         android:text="Provide Your Details"
         android:drawableRight="@drawable/ic_forward"
-        android:background="#DA4D4D"
+        android:background="#00b279"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>

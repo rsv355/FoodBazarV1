@@ -2,9 +2,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+
     >
 
+    <include layout="@layout/app_bar"></include>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -69,12 +70,25 @@
 
                 <TextView
 
+                    android:id="@+id/deliveryTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
                     android:textStyle="bold"
                     android:textColor="#fff"
-                    android:text="60 minute delivery time."
+                    android:text="60 minute"
+                    android:layout_gravity="center"
+
+                    />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:text=" delivery time."
                     android:layout_gravity="center"
 
                     />
