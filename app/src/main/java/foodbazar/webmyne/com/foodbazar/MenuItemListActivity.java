@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,7 @@ import foodbazar.webmyne.com.foodbazar.utils.PrefUtils;
 /**
  * Created by jaydeeprana on 02-06-2015.
  */
-public class MenuItemListActivity extends Activity {
+public class MenuItemListActivity extends ActionBarActivity {
 
 
     HotelsMenu hotelsMenuList;
@@ -34,9 +36,12 @@ public class MenuItemListActivity extends Activity {
     private ArrayList<HotelMenuItem> hotelMenuItemArrayList;
 
     private TextView hotelName;
+    private TextView deliveryTime;
     private ImageView hotelImage;
 
     private MyAppAdapter myAppAdapter;
+
+    private Toolbar toolbar;
 
 
     @Override
@@ -44,11 +49,10 @@ public class MenuItemListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_item_list);
 
+        setToolbar();
+
         // Get Hotel Menu
         hotelsMenuList= PrefUtils.getHotelsMenuItems(MenuItemListActivity.this);
-
-
-
 
 
         hotelMenuItemArrayList=hotelsMenuList.hotelMenuItemArrayList;
@@ -58,9 +62,11 @@ public class MenuItemListActivity extends Activity {
         menuItemListView.setAdapter(myAppAdapter);
 
         hotelName = (TextView) findViewById(R.id.hotelName);
+        deliveryTime = (TextView)findViewById(R.id.deliveryTime);
         hotelImage = (ImageView)findViewById(R.id.hotelImage);
 
         hotelName.setText(getIntent().getStringExtra("hotel_name"));
+        deliveryTime.setText(getIntent().getStringExtra("deliveryTime"));
 
         Glide.with(MenuItemListActivity.this)
                 .load(getIntent().getStringExtra("hotel_path"))
@@ -69,6 +75,23 @@ public class MenuItemListActivity extends Activity {
                 .into(hotelImage);
 
 
+    }
+
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+
+            toolbar.setTitle(getIntent().getStringExtra("hotel_name"));
+            toolbar.setSubtitle(getIntent().getStringExtra("hotel_category"));
+            setSupportActionBar(toolbar);
+            toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
     }
 
     private class MyAppAdapter extends BaseAdapter{

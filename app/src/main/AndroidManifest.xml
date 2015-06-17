@@ -40,6 +40,7 @@
         <activity android:name=".AddToCart"/>
         <activity android:name=".WalletActivity"/>
         <activity android:name=".SignUpActivity"/>
+        <activity android:name=".HomeScreen"/>
 
 
     </application>

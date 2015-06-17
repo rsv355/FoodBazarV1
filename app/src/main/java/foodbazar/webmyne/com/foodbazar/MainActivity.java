@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import foodbazar.webmyne.com.foodbazar.fragments.CitySelectionFragment;
@@ -28,10 +30,18 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
 
     LoginClass loginClass;
 
+
+
+
     @Override
     public void init(Bundle savedInstanceState) {
 
-        loginClass = PrefUtils.getLogin(MainActivity.this);
+
+
+
+       
+
+                loginClass = PrefUtils.getLogin(MainActivity.this);
 
         account = new GAccount("Your Name","Please Login Account",new ColorDrawable(Color.parseColor("#9e9e9e")),this.getResources().getDrawable(R.drawable.bamboo));
             this.addAccount(account);
@@ -67,7 +77,7 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
         // recorder section with icon and 10 notifications
         ContactUs = this.newSection("Give Me Rate",this.getResources().getDrawable(R.drawable.ic_photos),new Intent(this, RateActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
         // night section with icon, section color and notifications
-        History = this.newSection("HistoryPage", this.getResources().getDrawable(R.drawable.ic_pages), new OrderPlaceDetail()).setSectionColor(Color.parseColor("#DA4D4D"));
+        History = this.newSection("History Page", this.getResources().getDrawable(R.drawable.ic_pages), new Intent(this, HomeScreen.class)).setSectionColor(Color.parseColor("#DA4D4D"));
         // night section with section color
         SignIn = this.newSection("Sign In Page",this.getResources().getDrawable(R.drawable.ic_photos), new Intent(this, SignUpActivity.class)).setSectionColor(Color.parseColor("#DA4D4D"));
 
@@ -86,6 +96,9 @@ public class MainActivity extends GoogleNavigationDrawer implements GAccountList
         this.addSection(SignIn);
         this.addSection(History1);
         this.addSection(Contact);
+
+
+
 
      //   this.addDivisor();
 //        this.addSection(recorder);

@@ -28,4 +28,6 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'com.github.bumptech.glide:glide:3.5.1'
     compile 'com.github.chenupt.android:springindicator:1.0.1@aar'
+    compile files('libs/simple-side-drawer2.jar')
+    compile 'com.google.android.gms:play-services:7.0.0'
 }

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -23,8 +26,10 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import foodbazar.webmyne.com.foodbazar.fragments.HotelListFragment;
 import foodbazar.webmyne.com.foodbazar.model.FoodDiatList;
 import foodbazar.webmyne.com.foodbazar.model.HotelMenuItem;
+import foodbazar.webmyne.com.foodbazar.model.HotelsList;
 import foodbazar.webmyne.com.foodbazar.model.OrderItem;
 import foodbazar.webmyne.com.foodbazar.model.SubmitOrder;
 import foodbazar.webmyne.com.foodbazar.utils.PrefUtils;
@@ -32,7 +37,12 @@ import foodbazar.webmyne.com.foodbazar.utils.PrefUtils;
 /**
  * Created by jaydeeprana on 02-06-2015.
  */
-public class MenuItemDetailActivity extends Activity {
+public class MenuItemDetailActivity extends ActionBarActivity {
+
+
+    private Toolbar toolbar;
+
+    HotelsList hotelsList;
 
     int i = 1;
     private HotelMenuItem hotelMenuItem;
@@ -50,10 +60,21 @@ public class MenuItemDetailActivity extends Activity {
     private ImageView remove, add;
     private SubmitOrder submitOrder;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_item_detail1);
+        setContentView(R.layout.item_detail);
+
+        setToolbar();
+
+  //   PrefUtils.getPosition(MenuItemDetailActivity.this);
+
+        Log.e(" My Jaydeep's position", ""+PrefUtils.getPosition(MenuItemDetailActivity.this));
+
+        hotelsList = PrefUtils.getHotelsList(MenuItemDetailActivity.this);
 
 
         // Get Menu Items from PrefUtils Class
@@ -74,9 +95,9 @@ public class MenuItemDetailActivity extends Activity {
             public void onClick(View v) {
 
                 quantity.setText("Quantity " + (++i));
-                price.setText(getResources().getString(R.string.rupees) + " " + (Integer.parseInt(hotelMenuItem.Price) * i) + "");
+                price.setText(getResources().getString(R.string.rupees) + " " + (Double.parseDouble(hotelMenuItem.Price) * i) + "");
 
-                totalPrice.setText(getResources().getString(R.string.rupees) + " " + (Integer.parseInt(hotelMenuItem.Price) * i) + "");
+                totalPrice.setText(getResources().getString(R.string.rupees) + " " + (Double.parseDouble(hotelMenuItem.Price) * i) + "");
             }
         });
 
@@ -87,9 +108,9 @@ public class MenuItemDetailActivity extends Activity {
                 if (i > 1) {
 
                     quantity.setText("Quantity " + (--i));
-                    price.setText(getResources().getString(R.string.rupees) + " " + (Integer.parseInt(hotelMenuItem.Price) * i) + "");
+                    price.setText(getResources().getString(R.string.rupees) + " " + (Double.parseDouble(hotelMenuItem.Price) * i) + "");
 
-                    totalPrice.setText(getResources().getString(R.string.rupees) + " " + (Integer.parseInt(hotelMenuItem.Price) *i) + "");
+                    totalPrice.setText(getResources().getString(R.string.rupees) + " " + (Double.parseDouble(hotelMenuItem.Price) *i) + "");
 
                 }
 
@@ -110,6 +131,23 @@ public class MenuItemDetailActivity extends Activity {
 
     }
 
+
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+
+            toolbar.setTitle(getIntent().getStringExtra("item_name"));
+            setSupportActionBar(toolbar);
+            toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+    }
+
     private void initView() {
 
         addToCart = (TextView) findViewById(R.id.addToCart);
@@ -123,15 +161,15 @@ public class MenuItemDetailActivity extends Activity {
         totalPrice = (TextView)findViewById(R.id.totalPrice);
         //  cuisine= (TextView) findViewById(R.id.cuisine);
 
-        totalPrice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent it = new Intent(getApplicationContext(), AddToCart.class);
-                startActivity(it);
-
-            }
-        });
+//        totalPrice.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent it = new Intent(getApplicationContext(), AddToCart.class);
+//                startActivity(it);
+//
+//            }
+//        });
 
 
         addToCart.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +185,7 @@ public class MenuItemDetailActivity extends Activity {
                 Log.e("user id", "2");
                 Log.e("order by ", "2");
                 Log.e("hotel id", PrefUtils.getMenuItemDetail(MenuItemDetailActivity.this).HotelId + "");
-                Log.e("price to pay", (Integer.parseInt(hotelMenuItem.Price) * i) + "");
+                Log.e("price to pay", (Double.parseDouble(hotelMenuItem.Price) * i) + "");
 
                 if (PrefUtils.getCartItems(MenuItemDetailActivity.this) != null) {
                     submitOrder = PrefUtils.getCartItems(MenuItemDetailActivity.this);
@@ -157,7 +195,7 @@ public class MenuItemDetailActivity extends Activity {
 
                 ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
 
-                orderItems.add(new OrderItem(hotelMenuItem.foodDiatListArrayList.get(spinnerFoodDietType.getSelectedItemPosition()).DietId + "", hotelMenuItem.ItemId + "", hotelMenuItem.ItemaName + "", i + "", (Integer.parseInt(hotelMenuItem.Price) * i) + ""));
+                orderItems.add(new OrderItem(hotelMenuItem.foodDiatListArrayList.get(spinnerFoodDietType.getSelectedItemPosition()).DietId + "", hotelMenuItem.ItemId + "", hotelMenuItem.ItemaName + "", hotelMenuItem.TagLine + "", i + "", (Double.parseDouble(hotelMenuItem.Price) * i) + ""));
 
                 if(submitOrder.orderItemArrayList !=null) {
                     submitOrder.orderItemArrayList.add(orderItems.get(0));

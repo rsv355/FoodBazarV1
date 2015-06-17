@@ -66,14 +66,16 @@ public class UserDetailsFragment extends Fragment {
             etLastName.setText(loginClass.LName);
             etEmail.setText(loginClass.loginObject.EmailAddress);
 
-            btnLogin.setText("Logout");
+            Log.e("USer First Name :","" + loginClass.FName);
+
+        //    btnLogin.setText("Logout");
 
         }
 
-        else {
-
-            btnLogin.setText("Login");
-        }
+//        else {
+//
+//            btnLogin.setText("Login");
+//        }
     }
 
     @Override
@@ -90,25 +92,28 @@ public class UserDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (loginClass != null){
+                Intent it = new Intent(getActivity(), LoginActivity.class);
+            startActivity(it);
 
-                    btnLogin.setText("Login");
-
-                    PrefUtils.clearLogin(getActivity());
-
-                    etFirstName.setText("");
-                    etLastName.setText("");
-                    etEmail.setText("");
-
-                    loginClass = null;
-                }
-
-                else {
-                 //   btnLogin.setText("Logout");
-
-                    Intent it = new Intent(getActivity(), LoginActivity.class);
-              startActivity(it);
-                }
+//                if (loginClass != null){
+//
+//                    btnLogin.setText("Login");
+//
+//                    PrefUtils.clearLogin(getActivity());
+//
+//                    etFirstName.setText("");
+//                    etLastName.setText("");
+//                    etEmail.setText("");
+//
+//                    loginClass = null;
+//                }
+//
+//                else {
+//                 //   btnLogin.setText("Logout");
+//
+//                    Intent it = new Intent(getActivity(), LoginActivity.class);
+//              startActivity(it);
+//                }
 
 //                Intent it = new Intent(getActivity(), LoginActivity.class);
 //                startActivity(it);

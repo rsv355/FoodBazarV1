@@ -1,5 +1,6 @@
 package foodbazar.webmyne.com.foodbazar;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,10 +13,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import foodbazar.webmyne.com.foodbazar.fragments.CartDetailFragment;
 import foodbazar.webmyne.com.foodbazar.fragments.DeliveryTypeFragment;
 import foodbazar.webmyne.com.foodbazar.fragments.PaymentTypeFragment;
 import foodbazar.webmyne.com.foodbazar.fragments.UserDetailsFragment;
+import foodbazar.webmyne.com.foodbazar.model.AppConstants;
+import foodbazar.webmyne.com.foodbazar.model.HotelsList;
 import foodbazar.webmyne.com.foodbazar.model.SubmitOrder;
 import foodbazar.webmyne.com.foodbazar.utils.PrefUtils;
 import github.chenupt.springindicator.SpringIndicator;
@@ -23,15 +29,23 @@ import github.chenupt.springindicator.SpringIndicator;
 
 public class CartActivity extends ActionBarActivity {
 
+    HotelsList hotelList;
+
     private Toolbar toolbar;
     public ViewPager viewPager;
    // private SpringIndicator springIndicator;
     public TextView priceView;
+    private CircleImageView hotelLogo;
+
+
     private MyPagerAdapter adapter;
     SubmitOrder submitOrder;
 
     String tax;
     String fee;
+    String hotelPath;
+
+    CartDetailFragment fragmentCart;
 
     public void setCurrentTab(int i){
         viewPager.setCurrentItem(i);
@@ -41,12 +55,30 @@ public class CartActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-            tax = getIntent().getStringExtra("tax");
-        fee = getIntent().getStringExtra("fee");
+        hotelLogo = (CircleImageView)findViewById(R.id.hotelLogo);
+
+        hotelList = PrefUtils.getHotelsList(CartActivity.this);
+
+        hotelPath = hotelList.hotelArrayList.get(PrefUtils.getPosition(CartActivity.this)).LogoPath + hotelList.hotelArrayList.get(PrefUtils.getPosition(CartActivity.this)).Logo;
+
+        Log.e("Jaydeep Hotel Path ", ""+hotelPath );
+
+        Glide.with(CartActivity.this)
+                .load(hotelPath)
+                .placeholder(R.drawable.ic_launcher)
+                .into(hotelLogo);
+
+        setToolbar();
+
+//            tax = getIntent().getStringExtra("tax");
+//        fee = getIntent().getStringExtra("fee");
 
         Log.e("VAT TAX IS :", "" + tax);
 
         Log.e("DELIVERY FEE IS :", "" + fee);
+
+
+
 
         priceView= (TextView) findViewById(R.id.price);
         submitOrder= PrefUtils.getCartItems(CartActivity.this);
@@ -104,20 +136,20 @@ public class CartActivity extends ActionBarActivity {
         }
     }
 
-//    private void setToolbar() {
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        if (toolbar != null) {
-//            toolbar.setTitle("My Cart");
-//            setSupportActionBar(toolbar);
-//            toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
-//            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    finish();
-//                }
-//            });
-//        }
-//    }
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setTitle("My Cart");
+            setSupportActionBar(toolbar);
+            toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+    }
 
 
     public String getMyData() {

@@ -23,7 +23,7 @@ public class SplashActivity extends Activity {
 
 		txtFoodBazar.setTypeface(fonts);
 		//txtFoodBazar = (TextView)findViewById(R.id.txt_splash);
-		txtFoodBazar.setText("FOOD BAZAR");
+		txtFoodBazar.setText("FOOD BAAZAR");
 		Shimmer.Shimmer shimmer = new Shimmer.Shimmer();
 		shimmer.start(txtFoodBazar);
 
@@ -36,7 +36,7 @@ public class SplashActivity extends Activity {
 					sleep(5*1000);
 
 					// After 5 seconds redirect to another intent
-					Intent i=new Intent(getBaseContext(),MainActivity.class);
+					Intent i=new Intent(getBaseContext(),HomeScreen.class);
 					startActivity(i);
 
 					//Remove activity

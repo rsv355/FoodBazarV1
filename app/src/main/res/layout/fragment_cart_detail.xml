@@ -16,20 +16,47 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+        <TextView
                 android:id="@+id/addProduct"
                 android:paddingBottom="8dp"
                 android:textStyle="bold"
                 android:paddingLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:gravity="center"
+
                 android:layout_gravity="center"
                 android:text="ADD ORDER"
-                android:drawableLeft="@mipmap/add"
+
+                android:textSize="18sp"
+                android:textColor="#D84315"
+                android:layout_width="0dp"
+            android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/clearCart"
+                android:paddingBottom="8dp"
+                android:textStyle="bold"
+                android:paddingRight="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Clear Cart"
+
                 android:textSize="18sp"
                 android:textColor="#D84315"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
            <LinearLayout
                android:id="@+id/addOrderLayout"
                android:orientation="vertical"

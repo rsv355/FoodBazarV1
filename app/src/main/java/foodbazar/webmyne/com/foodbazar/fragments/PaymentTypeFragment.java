@@ -16,7 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import foodbazar.webmyne.com.foodbazar.HomeScreen;
 import foodbazar.webmyne.com.foodbazar.MainActivity;
+import foodbazar.webmyne.com.foodbazar.OrderConfirmActivity;
 import foodbazar.webmyne.com.foodbazar.R;
 import foodbazar.webmyne.com.foodbazar.model.AppConstants;
 import foodbazar.webmyne.com.foodbazar.model.SubmitOrder;
@@ -84,20 +86,20 @@ public class PaymentTypeFragment extends Fragment {
                         PrefUtils.AddItemToCart(submitOrder,getActivity());
                         break;
 
-                    case R.id.cd:
-                        submitOrder.PaymentTypeId= AppConstants.CREDIT_CARD+"";
-                        PrefUtils.AddItemToCart(submitOrder,getActivity());
-                        break;
-
-                    case R.id.nb:
-                        submitOrder.PaymentTypeId= AppConstants.NET_BANKING+"";
-                        PrefUtils.AddItemToCart(submitOrder,getActivity());
-                        break;
-
-                    case R.id.dc:
-                        submitOrder.PaymentTypeId= AppConstants.DEBIT_CARD+"";
-                        PrefUtils.AddItemToCart(submitOrder,getActivity());
-                        break;
+//                    case R.id.cd:
+//                        submitOrder.PaymentTypeId= AppConstants.CREDIT_CARD+"";
+//                        PrefUtils.AddItemToCart(submitOrder,getActivity());
+//                        break;
+//
+//                    case R.id.nb:
+//                        submitOrder.PaymentTypeId= AppConstants.NET_BANKING+"";
+//                        PrefUtils.AddItemToCart(submitOrder,getActivity());
+//                        break;
+//
+//                    case R.id.dc:
+//                        submitOrder.PaymentTypeId= AppConstants.DEBIT_CARD+"";
+//                        PrefUtils.AddItemToCart(submitOrder,getActivity());
+//                        break;
                 }
             }
         });
@@ -112,17 +114,20 @@ public class PaymentTypeFragment extends Fragment {
 
         object=new JSONObject();
         jsonArray=new JSONArray();
-        innerObject=new JSONObject();
+
         try {
             for(int i=0;i<submitOrder.orderItemArrayList.size();i++){
+
+                innerObject=new JSONObject();
                 innerObject.put("FoodDietId",submitOrder.orderItemArrayList.get(i).FoodDietId+"");
                 innerObject.put("MenuItem",submitOrder.orderItemArrayList.get(i).MenuItem+"");
                 innerObject.put("MenuItemQuantity",submitOrder.orderItemArrayList.get(i).MenuItemQuantity+"");
+                jsonArray.put(innerObject);
             }
 
 //            innerObject.put("OrderId","");
 //            innerObject.put("OrderItemId","");
-            jsonArray.put(innerObject);
+
             submitOrder.CustomerFirstName=UserDetailsFragment.firstname;
             submitOrder.CustomerLastName=UserDetailsFragment.lastname;
 
@@ -172,7 +177,9 @@ public class PaymentTypeFragment extends Fragment {
                     JSONObject object=new JSONObject(response);
                     if(object.getString("ResponseCode").equalsIgnoreCase("1")){
                         Toast.makeText(getActivity(), object.getString("ResponseMsg") + "\n" + "Your Order Id is " + object.getString("OrderConfirmId") + "", Toast.LENGTH_LONG).show();
-                        Intent i=new Intent(getActivity(), MainActivity.class);
+                        Intent i=new Intent(getActivity(), OrderConfirmActivity.class);
+
+                        i.putExtra("orderId",  object.getString("OrderConfirmId"));
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                         getActivity().finish();

@@ -1,6 +1,7 @@
 package foodbazar.webmyne.com.foodbazar;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 
@@ -24,7 +26,7 @@ import foodbazar.webmyne.com.foodbazar.utils.PrefUtils;
 public class LoginActivity extends ActionBarActivity {
 
     private ProgressDialog progressDialog;
-    private TextView btnLogin;
+    private TextView btnLogin, btnSignUp;
     private EditText etEmail,etPassword;
     private Toolbar toolbar;
     @Override
@@ -34,37 +36,56 @@ public class LoginActivity extends ActionBarActivity {
 
         btnLogin= (TextView) findViewById(R.id.btnLogin);
 
+        btnSignUp = (TextView)findViewById(R.id.btnSignUp);
+
         etEmail= (EditText) findViewById(R.id.etEmail);
         etPassword= (EditText) findViewById(R.id.etPassword);
-        etEmail.setText("nirav@gmail.com");
-        etPassword.setText("123456");
-     //   setToolbar();
+//        etEmail.setText("nirav@gmail.com");
+//        etPassword.setText("123456");
+       setToolbar();
 
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent it = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(it);
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callLoginService();
 
+                if (etEmail.getText().toString() == null || etPassword.getText().toString() == null){
+
+                    Toast.makeText(getApplicationContext(), "Please fill up the details", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    callLoginService();
+                }
             }
         });
     }
-//    private void setToolbar() {
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        if (toolbar != null) {
-//
-//            toolbar.setTitle(getIntent().getStringExtra("hotel_name"));
-//            toolbar.setSubtitle(getIntent().getStringExtra("hotel_category"));
-//            setSupportActionBar(toolbar);
-//            toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
-//            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    finish();
-//                }
-//            });
-//        }
- //   }
+    private void setToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+
+            toolbar.setTitle("Log In");
+
+            setSupportActionBar(toolbar);
+            toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
+    }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
@@ -93,6 +114,7 @@ public class LoginActivity extends ActionBarActivity {
         progressDialog.show();
         JSONObject object=new JSONObject();
         try {
+
             object.put("EmailAddress",etEmail.getText().toString().trim());
             object.put("Password",etPassword.getText().toString().trim());
             object.put("Roleid","3");
@@ -108,6 +130,7 @@ public class LoginActivity extends ActionBarActivity {
                 LoginClass loginClass= new GsonBuilder().create().fromJson(response, LoginClass.class);
                 PrefUtils.setLogin(loginClass, LoginActivity.this);
                 Log.e("login response:", loginClass.OwnerId + "");
+                Log.e("RESPONSE : ", response);
                 finish();
             }
 
