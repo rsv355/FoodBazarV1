@@ -33,10 +33,9 @@ public class CartActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
     public ViewPager viewPager;
-   // private SpringIndicator springIndicator;
-    public TextView priceView;
+    // private SpringIndicator springIndicator;
+    public TextView price;
     private CircleImageView hotelLogo;
-
 
     private MyPagerAdapter adapter;
     SubmitOrder submitOrder;
@@ -47,21 +46,22 @@ public class CartActivity extends ActionBarActivity {
 
     CartDetailFragment fragmentCart;
 
-    public void setCurrentTab(int i){
+    public void setCurrentTab(int i) {
         viewPager.setCurrentItem(i);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        hotelLogo = (CircleImageView)findViewById(R.id.hotelLogo);
+        hotelLogo = (CircleImageView) findViewById(R.id.hotelLogo);
 
         hotelList = PrefUtils.getHotelsList(CartActivity.this);
 
         hotelPath = hotelList.hotelArrayList.get(PrefUtils.getPosition(CartActivity.this)).LogoPath + hotelList.hotelArrayList.get(PrefUtils.getPosition(CartActivity.this)).Logo;
 
-        Log.e("Jaydeep Hotel Path ", ""+hotelPath );
+        Log.e("Jaydeep Hotel Path ", "" + hotelPath);
 
         Glide.with(CartActivity.this)
                 .load(hotelPath)
@@ -78,27 +78,28 @@ public class CartActivity extends ActionBarActivity {
         Log.e("DELIVERY FEE IS :", "" + fee);
 
 
-
-
-        priceView= (TextView) findViewById(R.id.price);
-        submitOrder= PrefUtils.getCartItems(CartActivity.this);
+        price = (TextView) findViewById(R.id.price);
+        submitOrder = PrefUtils.getCartItems(CartActivity.this);
         Log.e("hotel id", submitOrder.HotelId + "");
-       //setToolbar();
+
+        price.setText(submitOrder.TotalPrice);
+
+        //setToolbar();
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-      //  springIndicator = (SpringIndicator) findViewById(R.id.indicator);
+        //  springIndicator = (SpringIndicator) findViewById(R.id.indicator);
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         // just set viewPager
-      //  springIndicator.setViewPager(viewPager);
+        //  springIndicator.setViewPager(viewPager);
     }
 
-    public void setTotalPrice(double price){
-        priceView.setText(getResources().getString(R.string.rupees)+" "+price+"");
-    }
+//    public void setTotalPrice(double price) {
+//        priceView.setText(getResources().getString(R.string.rupees) + " " + price + "");
+//    }
 
     public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
-        private final String[] TITLES = {"1","2","3","4"};
+        private final String[] TITLES = {"1", "2", "3", "4"};
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -116,21 +117,18 @@ public class CartActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if(position == 0){
+            if (position == 0) {
 
                 CartDetailFragment fragment = new CartDetailFragment();
 
                 return CartDetailFragment.newInstance();
 
 
-            }
-            else if(position == 1){
+            } else if (position == 1) {
                 return DeliveryTypeFragment.newInstance();
-           }
- else if(position == 2){
+            } else if (position == 2) {
                 return UserDetailsFragment.newInstance();
-            }
- else{
+            } else {
                 return PaymentTypeFragment.newInstance();
             }
         }

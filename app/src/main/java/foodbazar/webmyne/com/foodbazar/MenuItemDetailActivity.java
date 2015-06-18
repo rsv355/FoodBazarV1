@@ -76,7 +76,6 @@ public class MenuItemDetailActivity extends ActionBarActivity {
 
         hotelsList = PrefUtils.getHotelsList(MenuItemDetailActivity.this);
 
-
         // Get Menu Items from PrefUtils Class
         hotelMenuItem = PrefUtils.getMenuItemDetail(MenuItemDetailActivity.this);
 
@@ -110,7 +109,7 @@ public class MenuItemDetailActivity extends ActionBarActivity {
                     quantity.setText("Quantity " + (--i));
                     price.setText(getResources().getString(R.string.rupees) + " " + (Double.parseDouble(hotelMenuItem.Price) * i) + "");
 
-                    totalPrice.setText(getResources().getString(R.string.rupees) + " " + (Double.parseDouble(hotelMenuItem.Price) *i) + "");
+                    totalPrice.setText(getResources().getString(R.string.rupees) + " " + (Double.parseDouble(hotelMenuItem.Price) * i) + "");
 
                 }
 
@@ -187,14 +186,39 @@ public class MenuItemDetailActivity extends ActionBarActivity {
                 Log.e("hotel id", PrefUtils.getMenuItemDetail(MenuItemDetailActivity.this).HotelId + "");
                 Log.e("price to pay", (Double.parseDouble(hotelMenuItem.Price) * i) + "");
 
+
                 if (PrefUtils.getCartItems(MenuItemDetailActivity.this) != null) {
                     submitOrder = PrefUtils.getCartItems(MenuItemDetailActivity.this);
                 } else {
                     submitOrder = new SubmitOrder();
                 }
 
-                ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+                OrderItem currentItem = new OrderItem(hotelMenuItem.foodDiatListArrayList.get(spinnerFoodDietType.getSelectedItemPosition()).DietId + "", hotelMenuItem.ItemId + "", hotelMenuItem.ItemaName + "", hotelMenuItem.TagLine + "", i + "", (Double.parseDouble(hotelMenuItem.Price)) + "");
 
+                if(submitOrder.orderItemArrayList != null){
+                    if(isALreadyAdded(currentItem) == true){
+
+                    }else{
+                        submitOrder.orderItemArrayList.add(currentItem);
+
+                    }
+                }else{
+                    submitOrder.orderItemArrayList = new ArrayList<OrderItem>();
+                    submitOrder.orderItemArrayList.add(currentItem);
+                }
+
+
+
+
+              /*  if(submitOrder.orderItemArrayList !=null){
+
+                }else{
+                    submitOrder.orderItemArrayList = new ArrayList<OrderItem>();
+
+
+                }
+
+                ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
                 orderItems.add(new OrderItem(hotelMenuItem.foodDiatListArrayList.get(spinnerFoodDietType.getSelectedItemPosition()).DietId + "", hotelMenuItem.ItemId + "", hotelMenuItem.ItemaName + "", hotelMenuItem.TagLine + "", i + "", (Double.parseDouble(hotelMenuItem.Price) * i) + ""));
 
                 if(submitOrder.orderItemArrayList !=null) {
@@ -203,7 +227,7 @@ public class MenuItemDetailActivity extends ActionBarActivity {
                     submitOrder.orderItemArrayList=new ArrayList<OrderItem>();
                     submitOrder.orderItemArrayList.add(orderItems.get(0));
                 }
-
+*/
 
                 submitOrder.DeliveryCity="1";
                 submitOrder.DeliveryCountry="1";
@@ -226,6 +250,20 @@ public class MenuItemDetailActivity extends ActionBarActivity {
             }
         });
 
+    }
+
+    public boolean isALreadyAdded(OrderItem currentItem){
+
+        boolean isAdded = false;
+        for(OrderItem item : submitOrder.orderItemArrayList){
+
+            if(item.MenuItemName.equalsIgnoreCase(currentItem.MenuItemName)){
+                int incrementedValue = Integer.parseInt(item.MenuItemQuantity)+i;
+                item.MenuItemQuantity = ""+incrementedValue;
+                isAdded = true;
+            }
+        }
+        return isAdded;
     }
 
     private class FoodDietSpinnerAdapter extends BaseAdapter implements SpinnerAdapter {

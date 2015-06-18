@@ -73,7 +73,7 @@ public class DeliveryTypeFragment extends Fragment {
 
          pickUpTime = (TextView)convertView.findViewById(R.id.pickTime);
 
-        deliveryCharge.setText(hotelsList.hotelArrayList.get(PrefUtils.getPosition(getActivity())).DeliveryFee);
+        deliveryCharge.setText(getResources().getString(R.string.rupees) + hotelsList.hotelArrayList.get(PrefUtils.getPosition(getActivity())).DeliveryFee);
         deliverTime.setText(hotelsList.hotelArrayList.get(PrefUtils.getPosition(getActivity())).DeliveryTime);
         pickUpTime.setText(hotelsList.hotelArrayList.get(PrefUtils.getPosition(getActivity())).PickUpTime);
 

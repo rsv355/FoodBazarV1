@@ -127,7 +127,7 @@ public class OrderHistoryDetailFragment extends Fragment {
             dTotalBottom=dSubTotal+dTax;
         }
 
-        ((CartActivity)getActivity()).setTotalPrice(dTotalBottom);
+      //  ((CartActivity)getActivity()).setTotalPrice(dTotalBottom);
         totalBottom.setText(getResources().getString(R.string.rupees) + " " + dTotalBottom + "");
         tax.setText(getResources().getString(R.string.rupees) + " " + dTax + "");
         subtotal.setText(getResources().getString(R.string.rupees) + " " + dSubTotal + "");

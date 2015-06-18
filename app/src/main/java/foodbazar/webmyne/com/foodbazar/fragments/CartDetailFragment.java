@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -26,6 +27,7 @@ import foodbazar.webmyne.com.foodbazar.LoginActivity;
 import foodbazar.webmyne.com.foodbazar.MenuListActivity;
 import foodbazar.webmyne.com.foodbazar.R;
 import foodbazar.webmyne.com.foodbazar.model.HotelsList;
+import foodbazar.webmyne.com.foodbazar.model.OrderItem;
 import foodbazar.webmyne.com.foodbazar.model.SubmitOrder;
 import foodbazar.webmyne.com.foodbazar.utils.PrefUtils;
 
@@ -36,19 +38,19 @@ public class CartDetailFragment extends Fragment {
     private LinearLayout addOrderLayout;
     private SubmitOrder submitOrder;
     private View itemView;
-    private TextView btnDeliveryType,totalBottom,tax,subtotal,taxPercent;
+    private TextView btnDeliveryType, totalBottom, tax, subtotal, taxPercent;
     private TextView addProduct;
     private TextView clearcart;
     ListView cartItemList;
     int quan;
-    Double  price;
+    Double price;
     int i;
     View footer;
     TextView itemPrice;
     TextView itemQuantity;
     MyAdapter adp;
 
-    public static Double dTax=0.0d,dSubTotal=0.0d,dTotalBottom=0.0d;
+    public static Double dTax = 0.0d, dSubTotal = 0.0d, dTotalBottom = 0.0d;
 
     String VatTax;
 
@@ -57,8 +59,7 @@ public class CartDetailFragment extends Fragment {
     HotelsList hotelList;
 
 
-    public static CartDetailFragment newInstance()
-    {
+    public static CartDetailFragment newInstance() {
         CartDetailFragment fragment = new CartDetailFragment();
 
 
@@ -84,7 +85,7 @@ public class CartDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        convertView= inflater.inflate(R.layout.fragment_cart_detail, container, false);
+        convertView = inflater.inflate(R.layout.fragment_cart_detail, container, false);
 
         CartActivity activity = (CartActivity) getActivity();
 
@@ -92,11 +93,13 @@ public class CartDetailFragment extends Fragment {
 //
 //        Log.e("JAYDEEP TAX IS :", "" +myDataFromActivity);
 
-        addProduct = (TextView)convertView.findViewById(R.id.addProduct);
-        cartItemList= (ListView)convertView.findViewById(R.id.cartItemList);
+        addProduct = (TextView) convertView.findViewById(R.id.addProduct);
+        cartItemList = (ListView) convertView.findViewById(R.id.cartItemList);
+
+        btnDeliveryType = (TextView) convertView.findViewById(R.id.btnDeliveryType);
 
 
-        clearcart = (TextView)convertView.findViewById(R.id.clearCart);
+        clearcart = (TextView) convertView.findViewById(R.id.clearCart);
 
         clearcart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +132,6 @@ public class CartDetailFragment extends Fragment {
         });
 
 
-
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,20 +154,21 @@ public class CartDetailFragment extends Fragment {
 
         taxPercent.setText(VatTax);*/
 
-      //  taxPercent.setText(myDataFromActivity);
+        //  taxPercent.setText(myDataFromActivity);
 
        /* addOrderLayout= (LinearLayout) convertView.findViewById(R.id.addOrderLayout);
         submitOrder= PrefUtils.getCartItems(getActivity());
         dSubTotal=0.0d;*/
 
-        submitOrder= PrefUtils.getCartItems(getActivity());
-        footer= getActivity().getLayoutInflater().inflate(R.layout.cart_listview_footer, cartItemList, false);
+        submitOrder = PrefUtils.getCartItems(getActivity());
+
+        footer = getActivity().getLayoutInflater().inflate(R.layout.cart_listview_footer, cartItemList, false);
         cartItemList.addFooterView(footer);
 
-        adp = new MyAdapter(getActivity(),submitOrder);
+        adp = new MyAdapter(getActivity(), submitOrder);
         cartItemList.setAdapter(adp);
 
-        updateTotal1();
+        //  updateTotal1();
 
 /*
         for( i=0; i<submitOrder.orderItemArrayList.size();i++) {
@@ -287,29 +290,61 @@ public class CartDetailFragment extends Fragment {
         submitOrder.TotalPrice=dTotalBottom+"";
         PrefUtils.AddItemToCart(submitOrder,getActivity());*/
 
-     /*   btnDeliveryType.setOnClickListener(new View.OnClickListener() {
+        btnDeliveryType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                Intent it = new Intent(getActivity(), ContactActivity.class);
-//                startActivity(it);
-
                 ((CartActivity)getActivity()).setCurrentTab(1);
             }
-        });*/
+        });
 
         return convertView;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-    public void updateTotal1(){
-        TextView subtotal = (TextView)footer.findViewById(R.id.subtotal);
-        double total=0.0;
-        for(int i=0;i<submitOrder.orderItemArrayList.size();i++){
-            total +=Double.parseDouble(submitOrder.orderItemArrayList.get(i).ItemPrice);
+        updateTotal1();
+    }
+
+    public void updateTotal1() {
+
+
+        hotelList = PrefUtils.getHotelsList(getActivity());
+        VatTax = hotelList.hotelArrayList.get(PrefUtils.getPosition(getActivity())).VatTax;
+
+        Log.e("VAT TAX :",  VatTax );
+
+        TextView taxPercent = (TextView) footer.findViewById(R.id.taxPercent);
+        taxPercent.setText(VatTax + "%");
+
+        taxx=Double.parseDouble(VatTax);
+
+        TextView subtotal = (TextView) footer.findViewById(R.id.subtotal);
+
+        double total = 0.0;
+
+        for(OrderItem item : submitOrder.orderItemArrayList){
+
+            double p = Double.parseDouble(item.ItemPrice) *  Integer.parseInt(item.MenuItemQuantity);
+            total = total + p;
         }
 
-        subtotal.setText(""+total);
+        subtotal.setText(getResources().getString(R.string.rupees)  + total);
+
+        TextView tax = (TextView) footer.findViewById(R.id.tax);
+        dTax=((total*taxx)/100);
+        tax.setText(getResources().getString(R.string.rupees) + dTax);
+
+
+
+        TextView totalBottom = (TextView) footer.findViewById(R.id.totalBottom);
+        totalBottom.setText(getResources().getString(R.string.rupees) + (dTax + total ));
+
+        submitOrder.TotalPrice = ""+(total+dTax);
+        PrefUtils.AddItemToCart(submitOrder, getActivity());
+
 
 
     }
@@ -320,10 +355,21 @@ public class CartDetailFragment extends Fragment {
         private Context context;
         SubmitOrder values;
 
-        MyAdapter(Context ctx,SubmitOrder obj){
+        MyAdapter(Context ctx, SubmitOrder obj) {
             this.context = ctx;
             this.values = obj;
         }
+
+        private class MyHolder {
+
+            TextView price;
+            TextView name;
+            TextView quantity;
+            ImageView add;
+            ImageView remove;
+            TextView delete;
+        }
+
 
         @Override
         public int getCount() {
@@ -332,70 +378,101 @@ public class CartDetailFragment extends Fragment {
 
         @Override
         public Object getItem(int i) {
-            return values.orderItemArrayList.get(i);
+            return i;
         }
 
         @Override
         public long getItemId(int i) {
-            return 0;
+            return i;
         }
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 
-            View row = inflater.inflate(R.layout.single_order_item_view, parent, false);
+            View row = convertView;
+           final  MyHolder holder;
+            if (row == null) {
+                holder = new MyHolder();
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+                row = inflater.inflate(R.layout.single_order_item_view, parent, false);
+                holder.price = (TextView) row.findViewById(R.id.price);
+                holder.name = (TextView) row.findViewById(R.id.name);
+                holder.quantity = (TextView) row.findViewById(R.id.quantity);
+                holder.add = (ImageView) row.findViewById(R.id.add);
+                holder.remove = (ImageView) row.findViewById(R.id.remove);
+                holder.delete = (TextView)row.findViewById(R.id.delete);
 
-            TextView price = (TextView) row.findViewById(R.id.price);
-            TextView name = (TextView) row.findViewById(R.id.name);
-            final TextView quantity = (TextView) row.findViewById(R.id.quantity);
+                row.setTag(holder);
 
-            ImageView add = (ImageView) row.findViewById(R.id.add);
-            ImageView remove = (ImageView) row.findViewById(R.id.remove);
-
-            name.setText(values.orderItemArrayList.get(i).MenuItemName);
-            price.setText("" + values.orderItemArrayList.get(i).ItemPrice);
-            quantity.setText("" + values.orderItemArrayList.get(i).MenuItemQuantity);
+            } else {
+                holder = (MyHolder) row.getTag();
+            }
 
 
 
-            add.setOnClickListener(new View.OnClickListener() {
+            double p = Double.parseDouble(values.orderItemArrayList.get(position).ItemPrice) *  Integer.parseInt(values.orderItemArrayList.get(position).MenuItemQuantity);
+            holder.price.setText(getResources().getString(R.string.rupees) +p);
+            holder.name.setText(values.orderItemArrayList.get(position).MenuItemName);
+            holder.quantity.setText("" + values.orderItemArrayList.get(position).MenuItemQuantity);
+
+            holder.add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.e("cliecked", "add");
 
-                    tempQty = Integer.parseInt(quantity.getText().toString());
-                    tempQty += 1;
-                    quantity.setText("" + tempQty);
+                    int currentQTY = Integer.parseInt(values.orderItemArrayList.get(position).MenuItemQuantity);
+                    currentQTY = currentQTY + 1;
+                    values.orderItemArrayList.get(position).MenuItemQuantity = "" + currentQTY;
+                    double revisedPrice = Double.parseDouble(values.orderItemArrayList.get(position).ItemPrice) * (currentQTY);
+                    Log.e("%%%%%%%", "qty " + currentQTY);
+                    Log.e("%%%%%%%", "price " + Double.parseDouble(values.orderItemArrayList.get(position).ItemPrice));
+                    Log.e("%%%%%%%", "ppp " + revisedPrice);
+                    //values.orderItemArrayList.get(position).ItemPrice = ""+revisedPrice;
+                    holder.price.setText("" + revisedPrice);
+                    submitOrder.orderItemArrayList = values.orderItemArrayList;
+                    PrefUtils.AddItemToCart(submitOrder, getActivity());
+                    adp.notifyDataSetChanged();
+                    updateTotal1();
 
-                    updateTotal(quantity.getText().toString(),values.orderItemArrayList.get(i).ItemPrice,position);
                 }
             });
 
-            remove.setOnClickListener(new View.OnClickListener() {
+            holder.remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (tempQty <= 1) {
-                        tempQty = Integer.parseInt(quantity.getText().toString());
-                        tempQty = 1;
-                        quantity.setText("" + tempQty);
-                    } else {
-                        tempQty = Integer.parseInt(quantity.getText().toString());
-                        tempQty -= 1;
-                        quantity.setText("" + tempQty);
-                    }
 
-                    updateTotal(quantity.getText().toString(),values.orderItemArrayList.get(i).ItemPrice,position);
+                    int currentQTY = Integer.parseInt(values.orderItemArrayList.get(position).MenuItemQuantity);
+                    values.orderItemArrayList.get(position).MenuItemQuantity = String.format("%d", (currentQTY==1)?currentQTY : currentQTY-1);
+                    double revisedPrice = Double.parseDouble(values.orderItemArrayList.get(position).ItemPrice) * Double.parseDouble(values.orderItemArrayList.get(position).MenuItemQuantity);
+                    //values.orderItemArrayList.get(position).ItemPrice = ""+revisedPrice;
+                    holder.price.setText(""+revisedPrice);
+                    submitOrder.orderItemArrayList = values.orderItemArrayList;
+                    PrefUtils.AddItemToCart(submitOrder, getActivity());
+                    adp.notifyDataSetChanged();
+                    updateTotal1();
                 }
             });
+
+            holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    submitOrder.orderItemArrayList.remove(position);
+                    PrefUtils.AddItemToCart(submitOrder, getActivity());
+                    adp.notifyDataSetChanged();
+                    updateTotal1();
+
+
+                }
+            });
+
+
 
             return row;
         }
 
 
-
-
-        private void updateTotal(String qty,String price,int menuItemPOS){
+        private void updateTotal(String qty, String price, int menuItemPOS) {
 
             try {
                 int tempQty = Integer.parseInt(qty);
@@ -411,9 +488,9 @@ public class CartDetailFragment extends Fragment {
                 updateTotal1();
 
                 adp.notifyDataSetChanged();
-            }catch (Exception e){
-                Log.e("exc",e.toString());
-        }
+            } catch (Exception e) {
+                Log.e("exc", e.toString());
+            }
 
 
         }
