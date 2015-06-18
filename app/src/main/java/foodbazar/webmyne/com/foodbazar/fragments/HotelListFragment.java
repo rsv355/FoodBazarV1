@@ -283,6 +283,8 @@ public class HotelListFragment  extends Fragment {
 
             }
 
+
+
             @Override
             public void error(VolleyError error) {
 
